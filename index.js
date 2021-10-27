@@ -20,14 +20,19 @@ app.use(cors())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
-app.use('/cliente',require('./routes/cliente'))
-app.use('/categoria',require('./routes/categoria'))
-app.use('/estoque',require('./routes/estoque'))
-app.use('/venda',require('./routes/venda'))
-app.use('/produto',require('./routes/produto'))
+const cliente = require('./routes/cliente')
+app.use('/cliente', cliente)
+const categoria = require('./routes/categoria')
+app.use('/categoria', categoria)
+const estoque = require('./routes/estoque')
+app.use('/estoque', estoque)
+const venda = require('./routes/venda')
+app.use('/venda', venda)
+const produto = require('./routes/produto')
+app.use('/produto', produto)
 
 
 app.listen(9000,()=>{
     console.log("SERVER STARTED");
-    console.log("RUNNING IN URL https://localhost:9000");
+    console.log("RUNNING IN URL http://localhost:9000");
 })
