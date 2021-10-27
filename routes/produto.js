@@ -52,5 +52,18 @@ router.post('/post',((req, res) => {
     })
 }))
 
+router.delete('/delete',((req, res) => {
+    req.getConnection((err,conn)=> {
+        if (err)
+            return res.status(500).send('Internal Server Error')
+        const id = req.body.id
+        conn.query('delete from produto where id = ?',[id],(err, rows)=>{
+            if(err)
+                return res.status(500).send('Internal Server Error')
+            res.status(200).json(rows)
+        })
+    })
+}))
+
 
 module.exports = router
