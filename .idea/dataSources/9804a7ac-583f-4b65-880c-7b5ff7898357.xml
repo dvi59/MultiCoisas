@@ -801,11 +801,13 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Position>4</Position>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
     </column>
     <column id="243" parent="234" name="data_modificacao">
       <Position>5</Position>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
     </column>
     <key id="244" parent="234" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
@@ -842,11 +844,13 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Position>6</Position>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
     </column>
     <column id="251" parent="235" name="data_modificacao">
       <Position>7</Position>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
     </column>
     <key id="252" parent="235" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
@@ -878,11 +882,13 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Position>5</Position>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
     </column>
     <column id="258" parent="236" name="data_modificacao">
       <Position>6</Position>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
     </column>
     <index id="259" parent="236" name="produtoid">
       <ColNames>produtoid</ColNames>
@@ -929,57 +935,90 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Position>6</Position>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
     </column>
     <column id="268" parent="237" name="data_modificacao">
       <Position>7</Position>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
     </column>
-    <key id="269" parent="237" name="PRIMARY">
+    <index id="269" parent="237" name="categoriaid">
+      <ColNames>categoriaid</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="270" parent="237" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="270" parent="238" name="id">
+    <foreign-key id="271" parent="237" name="categoriaid">
+      <ColNames>categoriaid</ColNames>
+      <RefTableName>categoria</RefTableName>
+      <RefColNames>id</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+    </foreign-key>
+    <column id="272" parent="238" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="271" parent="238" name="codigo">
+    <column id="273" parent="238" name="codigo_produto">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="272" parent="238" name="valor">
+    <column id="274" parent="238" name="valor">
       <Position>3</Position>
       <DataType>varchar(128)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="273" parent="238" name="data_venda">
+    <column id="275" parent="238" name="data_venda">
       <Position>4</Position>
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="274" parent="238" name="clienteid">
+    <column id="276" parent="238" name="clienteid">
       <Position>5</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="275" parent="238" name="data_criacao">
+    <column id="277" parent="238" name="data_criacao">
       <Position>6</Position>
-      <DataType>int(11)|0s</DataType>
+      <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
     </column>
-    <column id="276" parent="238" name="data_modificacao">
+    <column id="278" parent="238" name="data_modificacao">
       <Position>7</Position>
-      <DataType>int(11)|0s</DataType>
+      <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
     </column>
-    <key id="277" parent="238" name="PRIMARY">
+    <index id="279" parent="238" name="codigo">
+      <ColNames>codigo_produto</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="280" parent="238" name="clienteid">
+      <ColNames>clienteid</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="281" parent="238" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
+    <foreign-key id="282" parent="238" name="codigo">
+      <ColNames>codigo_produto</ColNames>
+      <RefTableName>produto</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="283" parent="238" name="clienteid">
+      <ColNames>clienteid</ColNames>
+      <RefTableName>cliente</RefTableName>
+      <RefColNames>id</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+    </foreign-key>
   </database-model>
 </dataSource>

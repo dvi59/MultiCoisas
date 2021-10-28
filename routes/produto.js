@@ -57,13 +57,20 @@ router.delete('/delete',((req, res) => {
         if (err)
             return res.status(500).send('Internal Server Error')
         const id = req.body.id
-        conn.query('delete from produto where id = ?',[id],(err, rows)=>{
+        conn.query('select * from estoque where produtoid = ? ',[id],(err,rows)=>{
             if(err)
                 return res.status(500).send('Internal Server Error')
-            res.status(200).json(rows)
+            if(rows.length > 0)
+                return res.status(400).send('Com registro na tabela de estoque')
+            conn.query('delete from produto where id = ?',[id],(err, rows)=>{
+                if(err)
+                    return res.status(500).send('Internal Server Error')
+                res.status(200).send('Delete executado com Sucesso')
+            })
         })
+
+
     })
 }))
-
 
 module.exports = router

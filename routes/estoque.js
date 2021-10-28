@@ -23,10 +23,16 @@ router.post('/post',((req, res) => {
         const quantidade = req.body.quantidade
         const preco = req.body.preco
 
-        conn.query('insert into estoque(produtoid,quantidade,preco) values (?,?,?)',[produtoid,quantidade,preco],(err, rows)=>{
+        conn.query('select * from produto where id = ?',[produtoid],(err,rows)=>{
             if(err)
                 return res.status(500).send('Internal Server Error')
-            res.status(200).json(rows)
+            if(rows.length === 0)
+                return res.status(400).send('Produto não existe')
+            conn.query('insert into estoque(produtoid,quantidade,preco) values (?,?,?)',[produtoid,quantidade,preco],(err, rows)=>{
+                if(err)
+                    return res.status(500).send('Internal Server Error')
+                res.status(200).json(rows)
+            })
         })
     })
 }))
@@ -43,20 +49,19 @@ router.put('/put',((req, res) => {
         const preco = req.body.preco
         const modificacao = new Date()
 
-        conn.query('update estoque set  quantidade = ?, preco = ? , data_modificacao = ?  where id = ?',[quantidade,preco,modificacao,id], (err, rows)=>{
+        conn.query('select * from produto where id = ?',[id],(err,rows)=>{
             if(err)
                 return res.status(500).send('Internal Server Error')
-            res.status(200).json(rows)
+            if(rows.length === 0)
+                return res.status(400).send('Produto não existe')
+            conn.query('update estoque set  quantidade = ?, preco = ? , data_modificacao = ?  where produtoid = ?',[quantidade,preco,modificacao,id], (err, rows)=>{
+                if(err)
+                    return res.status(500).send('Internal Server Error')
+                res.status(200).json(rows)
+            })
         })
     })
 }))
-
-
-
-
-
-
-
 
 
 module.exports = router

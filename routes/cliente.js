@@ -1,6 +1,12 @@
 const express = require('express')
 const router = express.Router()
 
+function calcIdade(idade){
+    const dataAtual = new Date().getFullYear()
+
+    return (dataAtual-idade.getFullYear()) >= 18
+}
+
 router.get('/get',((req, res) => {
     req.getConnection((err,conn)=>{
         if(err)
@@ -21,10 +27,14 @@ router.post('/post',((req, res) => {
 
         const codigo = req.body.codigo
         const nome = req.body.nome
-        const data_nasc = req.body.data_nasc
+        const data = req.body.data_nasc
+        const data_nasc = new Date(data)
         const email = req.body.email
 
-
+        if(nome === "" || data === "")
+            return res.status(400).send('Nome e Data de Nascimento são Cammpos OBRIGATÓRIOS')
+        if(!calcIdade(data_nasc))
+            return res.status(400).send('Cliente Menor de 18 Anos')
         conn.query('insert into cliente(codigo,nome,data_nasc,email) values (?,?,?,?)',[codigo,nome,data_nasc,email],(err, rows)=>{
             if(err)
                 return res.status(500).send('Internal Server Error')
@@ -51,8 +61,5 @@ router.put('/put',((req, res) => {
         })
     })
 }))
-
-
-
 
 module.exports = router
