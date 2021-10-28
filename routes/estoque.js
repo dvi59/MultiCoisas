@@ -32,7 +32,7 @@ router.post('/post',((req, res) => {
 }))
 
 
-//todo
+
 router.put('/put',((req, res) => {
     req.getConnection((err,conn)=> {
         if (err)
