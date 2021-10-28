@@ -43,7 +43,7 @@ router.put('/put',((req, res) => {
         const preco = req.body.preco
         const modificacao = new Date()
 
-        conn.query('update estoque set  quantidade = ?, preco = ?  where id = ?',[quantidade,preco,modificacao,id], (err, rows)=>{
+        conn.query('update estoque set  quantidade = ?, preco = ? , data_modificacao = ?  where id = ?',[quantidade,preco,modificacao,id], (err, rows)=>{
             if(err)
                 return res.status(500).send('Internal Server Error')
             res.status(200).json(rows)
