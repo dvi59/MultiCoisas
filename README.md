@@ -10,4 +10,4 @@ Desenvolvido em mySql, segue um backup do mesmo na pasta 'database' com o nome d
 Arquivo necessário para a configuração do banco de dados
 
 ## Postman
-Na pasta 'postman', segue a pasta backup para os testes necessários para a aplicação
+Na pasta 'postman', segue a pasta backup para os testes necessários da aplicação
